@@ -2,6 +2,7 @@
 using HamsterWars.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Services;
 
 namespace HamsterWars.API.Controllers
 {
@@ -10,18 +11,20 @@ namespace HamsterWars.API.Controllers
     public class HamsterController : ControllerBase
     {
         private readonly HamsterWarsDbContext _context;
+        private readonly HamsterService hamsterService;
 
-        public HamsterController(HamsterWarsDbContext context)
+        public HamsterController(
+            HamsterWarsDbContext context,
+            HamsterService hamsterService)
         {
             _context = context;
+            this.hamsterService = hamsterService;
         }
 
-        //GetAll
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Hamster>>> GetAll() =>
             await _context.Hamsters.ToListAsync();
 
-        //GetById
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Hamster>> GetById(int id)
         {
@@ -29,11 +32,8 @@ namespace HamsterWars.API.Controllers
             {
                 var hamster = await _context.Hamsters.FirstOrDefaultAsync((h) => h.Id == id);
 
-                if (!HamsterExists(id))
-                {
+                if (hamster is null)
                     return NotFound();
-                }
-
                 return Ok(hamster);
             }
             catch (Exception)
@@ -47,7 +47,7 @@ namespace HamsterWars.API.Controllers
         //public async Task<ActionResult<IEnumerable<Hamster>>> GetRandom()
         //{
         //    Random random = new Random();
-            
+
         //    var hamsterList = _context.Hamsters.ToList();
         //    var hamster = random.Next(hamsterList.Count);
 
@@ -58,25 +58,20 @@ namespace HamsterWars.API.Controllers
         //    return Ok(hamster);
         //}
 
-        //Create
         [HttpPost]
-        public async Task<ActionResult<Hamster>> Post([FromBody] Hamster hamster)
+        public async Task<ActionResult<Hamster>> Create([FromBody] Hamster hamster)
         {
             _context.Hamsters.Add(hamster);
             await _context.SaveChangesAsync();
 
             return NoContent();
-            //return RedirectToAction("Index");
         }
 
-        //Update
-        [HttpPut ("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Hamster hamster)
         {
             if (id != hamster.Id)
-            {
                 return BadRequest();
-            }
 
             _context.Entry(hamster).State = EntityState.Modified;
 
@@ -86,39 +81,31 @@ namespace HamsterWars.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HamsterExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
+                if (hamsterService.Exists(id))
                     throw;
-                }
+                return NotFound();
             }
-
-            return NoContent();
+            return Ok();
         }
 
-        //Delete
-        [HttpDelete ("{id}")]
+        [HttpDelete("delete{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var hamster = await _context.Hamsters.FindAsync(id);
 
-            if (!HamsterExists(id))
+            if (hamster is null)
+                return BadRequest();
+
+            try
             {
-                return NotFound();
+                _context.Hamsters.Remove(hamster);
+                await _context.SaveChangesAsync();
             }
-
-            _context.Hamsters.Remove(hamster);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool HamsterExists(int id)
-        {
-            return (_context.Hamsters?.Any(h => h.Id == id)).GetValueOrDefault();
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+            return Ok();
         }
 
     }

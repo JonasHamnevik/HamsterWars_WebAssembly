@@ -10,6 +10,6 @@ public class HamsterWarsDbContext : DbContext
     {
     }
 
-    public DbSet<Hamster>? Hamsters { get; set; }
+    public DbSet<Hamster> Hamsters => Set<Hamster>();
 
 }

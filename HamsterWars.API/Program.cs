@@ -1,16 +1,19 @@
 using Core;
 using Microsoft.EntityFrameworkCore;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var services = builder.Services;
+services.AddScoped<HamsterService>();
 
-builder.Services.AddControllers();
+services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
 
-builder.Services.AddDbContext<HamsterWarsDbContext>(options =>
+services.AddDbContext<HamsterWarsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HamsterWarsConnection")));
 
 var app = builder.Build();
@@ -18,12 +21,12 @@ var app = builder.Build();
 //Creates Database and adds the seed-data on start if it doesn't exist.
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
+    var scopedServices = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<HamsterWarsDbContext>();
+    var context = scopedServices.GetRequiredService<HamsterWarsDbContext>();
     context.Database.EnsureCreated();
 
-    SeedData.Initialize(services);
+    SeedData.Initialize(scopedServices);
 }
 
 // Configure the HTTP request pipeline.

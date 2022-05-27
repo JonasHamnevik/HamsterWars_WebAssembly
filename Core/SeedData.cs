@@ -14,7 +14,7 @@ public class SeedData
         {
             if (context == null)
             {
-                throw new ArgumentNullException("Null HamsterWarsDbContext");
+                throw new InvalidDataException("Null HamsterWarsDbContext");
             }
 
             if (context.Hamsters.Any())
