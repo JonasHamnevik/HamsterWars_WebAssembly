@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterWars.Client", "HamsterWars.Client\HamsterWars.Client.csproj", "{AAE0E935-BDCE-4DF9-A0C2-5B496AD5392A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamsterWars.Client", "HamsterWars.Client\HamsterWars.Client.csproj", "{AAE0E935-BDCE-4DF9-A0C2-5B496AD5392A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{76A614B9-B83E-42B5-9178-3B044A371758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{76A614B9-B83E-42B5-9178-3B044A371758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterWars.API", "HamsterWars.API\HamsterWars.API.csproj", "{CC6BF543-2577-4644-8B58-5D33ECC6536B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamsterWars.API", "HamsterWars.API\HamsterWars.API.csproj", "{CC6BF543-2577-4644-8B58-5D33ECC6536B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterWars.Shared", "HamsterWars.Shared\HamsterWars.Shared.csproj", "{338E3AD6-466B-4D8F-80A3-3A0D79948470}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamsterWars.Shared", "HamsterWars.Shared\HamsterWars.Shared.csproj", "{338E3AD6-466B-4D8F-80A3-3A0D79948470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{BE5CCB7E-B0BD-4B51-97CC-023C182EE812}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{BE5CCB7E-B0BD-4B51-97CC-023C182EE812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
