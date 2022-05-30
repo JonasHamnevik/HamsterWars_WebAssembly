@@ -1,0 +1,57 @@
+﻿@page "/gallery"
+
+<PageTitle>Gallery</PageTitle>
+
+<h1>Gallery</h1>
+
+@if (imageSource is not null)
+{
+    <div>
+        <img src="@imageSource" />
+    </div>
+}
+
+
+@*Bootstrap test*@
+
+
+<div class="row">  
+
+@for (var i = 1; i <= 40; i++)
+{
+    var imageId = i;
+    
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <a href="@ShowImage(imageId)" target="_blank">
+          <img src="@ShowImage(imageId)" alt="Lights" style="width:100%">
+        </a>  
+          <div class="caption">
+            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+          </div>        
+          <div class="text-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-primary" onclick="">View</button>
+  <button type="button" class="btn btn-secondary" onclick="">Edit</button>
+  <button type="button" class="btn btn-danger" onclick="">Delete</button>
+</div>
+</div>
+
+
+      </div>
+    </div>
+
+}
+</div> 
+
+
+@code {
+    private string? imageSource;
+
+    private string ShowImage(int id)
+    {
+        imageSource = $"images/hamster/hamster-{id}.jpg";
+
+        return imageSource;
+    }
+}
