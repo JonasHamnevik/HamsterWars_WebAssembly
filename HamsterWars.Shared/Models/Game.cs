@@ -8,10 +8,10 @@ namespace HamsterWars.Shared.Models
         public Hamster First { get; set; }
         public Hamster Second { get; set; }
 
-        public Game(int first, int second)
+        public Game(Hamster first, Hamster second)
         {
-            First.Id = first;
-            Second.Id = second;
+            First = first;
+            Second = second;
         }
     }
 }

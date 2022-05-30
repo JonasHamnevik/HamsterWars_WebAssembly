@@ -49,10 +49,10 @@ public class GameService
         if (secondId == firstId)
             secondId = GetHamster();
 
-        Hamster first;
-        Hamster second;
+        Hamster first = _context.Hamsters.FirstOrDefault(x => x.Id == firstId);
+        Hamster second = _context.Hamsters.FirstOrDefault(x => x.Id == secondId);
 
-        var game = new Game(firstId, secondId);
+        var game = new Game(first, second);
         return game;
     }
 }
