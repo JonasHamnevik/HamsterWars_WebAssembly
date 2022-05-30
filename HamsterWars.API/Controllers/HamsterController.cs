@@ -42,22 +42,6 @@ namespace HamsterWars.API.Controllers
             }
         }
 
-        //GetRandom
-        //[HttpGet ("GetRandom")]
-        //public async Task<ActionResult<IEnumerable<Hamster>>> GetRandom()
-        //{
-        //    Random random = new Random();
-
-        //    var hamsterList = _context.Hamsters.ToList();
-        //    var hamster = random.Next(hamsterList.Count);
-
-        //    if (!HamsterExists(hamster))
-        //    {
-        //        random.Next(hamster);
-        //    }
-        //    return Ok(hamster);
-        //}
-
         [HttpPost]
         public async Task<ActionResult<Hamster>> Create([FromBody] Hamster hamster)
         {
