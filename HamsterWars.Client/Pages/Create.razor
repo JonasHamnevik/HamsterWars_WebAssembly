@@ -1,0 +1,27 @@
+﻿@page "/create"
+
+<PageTitle>Create</PageTitle>
+
+<h1>New player</h1>
+
+<form action="/action_page.php">
+  <div class="mb-3 mt-3 card p-3 bg-light">
+    <label for="email" class="form-label">Name:</label>
+    <input type="email" class="form-control" id="name" placeholder="Example: One-Punch Ham" name="name">
+<br />
+    <label for="email" class="form-label">Age:</label>
+    <input type="email" class="form-control" id="email" placeholder="Example: 9000" name="age">
+<br />
+    <label for="pwd" class="form-label">Favorite Food:</label>
+    <input type="password" class="form-control" id="pwd" placeholder="Example: KFC" name="food">
+<br />
+    <label for="pwd" class="form-label">Loves:</label>
+    <input type="password" class="form-control" id="pwd" placeholder="Example: Fighting Love" name="loves">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+@code {
+
+}
