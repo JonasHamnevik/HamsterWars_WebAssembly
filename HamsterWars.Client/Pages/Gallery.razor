@@ -2,56 +2,68 @@
 
 <PageTitle>Gallery</PageTitle>
 
-<h1>Gallery</h1>
+<h1>Meet our contestants!</h1>
 
-@if (imageSource is not null)
+@if (imagePath is not null)
 {
     <div>
-        <img src="@imageSource" />
+        <img src="@imagePath" />
     </div>
 }
 
-
-@*Bootstrap test*@
-
-
-<div class="row">  
+<div class="container">
+    <div class="row">  
 
 @for (var i = 1; i <= 40; i++)
 {
     var imageId = i;
     
     <div class="col-md-4">
-      <div class="thumbnail">
-        <a href="@ShowImage(imageId)" target="_blank">
-          <img src="@ShowImage(imageId)" alt="Lights" style="width:100%">
-        </a>  
-          <div class="caption">
-            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-          </div>        
-          <div class="text-center">
-            <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-primary" onclick="">View</button>
-  <button type="button" class="btn btn-secondary" onclick="">Edit</button>
-  <button type="button" class="btn btn-danger" onclick="">Delete</button>
-</div>
-</div>
-
-
-      </div>
-    </div>
-
-}
+        <div class="card bg-light">
+            
+            <a href="@ShowImage(imageId)" target="_blank">
+                <img src="@ShowImage(imageId)" alt="Hamster" style="width:100%">
+            </a> 
+        <div class="card-body">
+                <h4 class="card-title text-center">Hamster</h4>
+                
+                   
+            <ul class="list-group">
+                
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Age: 
+                <span>2</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Favorite Food: 
+                <span>Apples</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Loves:
+                <span>Playing</span>
+                </li>
+                
+</ul>
+<br/>
+<div class="d-grid">
+    <button type="button" class="btn btn-outline-danger btn-block btn-sm">Delete</button>
+  </div>
 </div> 
+        </div>
+        
 
+    </div>
+}
+    </div> 
+</div>
 
 @code {
-    private string? imageSource;
+    private string? imagePath;
 
     private string ShowImage(int id)
     {
-        imageSource = $"images/hamster/hamster-{id}.jpg";
+        imagePath = $"images/hamster/hamster-{id}.jpg";
 
-        return imageSource;
+        return imagePath;
     }
 }
