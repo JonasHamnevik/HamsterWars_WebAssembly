@@ -55,4 +55,26 @@ public class GameService
         var game = new Game(first, second);
         return game;
     }
+
+    public bool Play(int firstId, int secondId, int winnerId)
+    {
+        var first = _context.Hamsters.Where(h => h.Id == firstId).FirstOrDefault<Hamster>();
+        var second = _context.Hamsters.Where(h => h.Id == secondId).FirstOrDefault<Hamster>();
+        if (firstId == winnerId)
+        {
+            first.Wins++;
+            first.Games++;
+            second.Games++;
+            second.Losses++;
+        }
+        else
+        {
+            second.Wins++;
+            second.Games++;
+            first.Games++;
+            first.Losses++;
+        }
+        _context.SaveChanges();
+        return true;
+    }
 }

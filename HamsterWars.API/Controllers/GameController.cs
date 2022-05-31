@@ -13,25 +13,30 @@ namespace HamsterWars.API.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private readonly HamsterWarsDbContext _context;
         private readonly GameService gameService;
 
-        public GameController(
-            HamsterWarsDbContext context,
-            GameService gameService)
+        public GameController(GameService gameService)
         {
-            _context = context;
             this.gameService = gameService;
         }
 
-        [HttpGet ("GetAll")]
+        [HttpGet("GetAll")]
         public IEnumerable<HamsterDTO> GetAll() =>
         gameService.CreateHamsterDTOs();
 
-        [HttpGet]
+        [HttpGet("CreateGame")]
         public Game CreateGame()
         {
             return gameService.CreateGame();
+        }
+
+        [HttpPut("Play/{first}/{second}/{winner}/")]
+        public IActionResult Play([FromRoute] int first, [FromRoute] int second, [FromRoute] int winner)
+        {
+            bool playGame = gameService.Play(first, second, winner);
+            if (playGame)
+                return Ok();
+            return BadRequest();
         }
     }
 }
