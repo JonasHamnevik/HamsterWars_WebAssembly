@@ -2,25 +2,31 @@
 
 <PageTitle>Create</PageTitle>
 
-<h1>New player</h1>
+<h1>New player<span class="blinking">_</span></h1>
 
-<form action="/action_page.php">
-  <div class="mb-3 mt-3 card p-3 bg-light">
-    <label for="email" class="form-label">Name:</label>
-    <input type="email" class="form-control" id="name" placeholder="Example: One-Punch Ham" name="name">
-<br />
-    <label for="email" class="form-label">Age:</label>
-    <input type="email" class="form-control" id="email" placeholder="Example: 9000" name="age">
-<br />
-    <label for="pwd" class="form-label">Favorite Food:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Example: KFC" name="food">
-<br />
-    <label for="pwd" class="form-label">Loves:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Example: Fighting Love" name="loves">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
+<div class="col-md-6 mb-3 mt-3 card p-3 bg-light">
+    <form class="row g-3">
+        <div class="col-md-6">
+            <label for="validationDefault01" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="One-Punch Ham" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault02" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" name="age" min="0" max="10" placeholder="9000" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Favorite Food</label>
+            <input type="text" class="form-control" id="food" name="food" placeholder="KFC" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault04" class="form-label">Loves</label>
+            <input type="text" class="form-control" id="loves" name="loves" placeholder="Fighting Love" required>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">            
+            <button class="btn btn-primary" type="submit">Go!</button>
+        </div>
+    </form>
+</div>
 
 @code {
 
