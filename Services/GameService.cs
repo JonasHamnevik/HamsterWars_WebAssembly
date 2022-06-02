@@ -33,7 +33,7 @@ public class GameService
             .ToList();
     }
 
-    public int GetHamster()
+    private int GetRandomHamsterId()
     {
         List<int> hamsterId = _context.Hamsters.Select(h => h.Id).ToList();
         Random random = new Random();
@@ -43,11 +43,11 @@ public class GameService
     }
     public Game CreateGame()
     {
-        var firstId = GetHamster();
-        var secondId = GetHamster();
+        var firstId = GetRandomHamsterId();
+        var secondId = GetRandomHamsterId();
 
         if (secondId == firstId)
-            secondId = GetHamster();
+            secondId = GetRandomHamsterId();
 
         Hamster first = _context.Hamsters.FirstOrDefault(x => x.Id == firstId);
         Hamster second = _context.Hamsters.FirstOrDefault(x => x.Id == secondId);

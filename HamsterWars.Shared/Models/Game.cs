@@ -1,17 +1,17 @@
 ﻿
-using HamsterWars.Shared.DTOs;
+namespace HamsterWars.Shared.Models;
 
-namespace HamsterWars.Shared.Models
+public class Game
 {
-    public class Game
-    {
-        public Hamster First { get; set; }
-        public Hamster Second { get; set; }
+    public Hamster First { get; set; }
+    public Hamster Second { get; set; }
 
-        public Game(Hamster first, Hamster second)
-        {
-            First = first;
-            Second = second;
-        }
+    public Game(Hamster first, Hamster second)
+    {
+        if (first is null)
+            throw new ArgumentNullException();
+
+        First = first;
+        Second = second;
     }
 }
