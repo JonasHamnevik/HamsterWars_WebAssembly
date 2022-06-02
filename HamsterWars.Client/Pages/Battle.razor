@@ -1,6 +1,13 @@
 @page "/battle"
+@using System.Security.Cryptography
 
 <PageTitle>Battle</PageTitle>
+
+<audio autoplay>
+  <source src="gman_choose1.mp3" type="audio/mpeg">
+</audio>
+
+<p hidden="@HideLabel">             @*Battle*@
 
 <h1>Choose you fighter!</h1>
 
@@ -10,79 +17,133 @@
 
 <div class="row">
 
-    <div class="col-md-4">
-        <div class="card bg-light" style="width:auto">
-            <a href="" target="_blank">
-                <img class="card-img-top" src="images/hamster/hamster-1.jpg" alt="Card image" onclick="">
-            </a>
+<div class="col-md-4">
+    <div class="card bg-light" style="width:auto">
+            <img class="card-img-top" src="@ShowImage(Random())" alt="Card image" onclick="@Toggle">
+<div class="card-body">
+    <h4 class="card-title text-center">Hamster 1</h4>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Age                    <span>2</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Favorite Food          <span>Apples</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Loves                  <span>Playing</span>
+    </li> 
+</ul>
+</div>
+    </div>
+</div>
+
+<div class="col-md-3" >
+    <a href="" target="_blank">
+        <img class="card-img-top" src="images/vs.png" alt="vs" onclick="">
+    </a>
+</div>
+
+<div class="col-md-4">
+    <div class="card bg-light" style="width:auto">
+            <img class="card-img-top" src="@ShowImage(Random())" alt="Card image" onclick="@Toggle">
+<div class="card-body">
+    <h4 class="card-title text-center">Hamster 2</h4>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Age                    <span>2</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Favorite Food          <span>Apples</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Loves                  <span>Playing</span>
+    </li> 
+</ul>
+</div>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+</p>
+
+
+
+<p hidden="@(!HideLabel)">          @*Winner*@
+
+<h1>You win!</h1>
+
+<br />
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4">
+
+    <div class="card bg-light" style="width:auto">
+        <img class="card-img-top" src="@ShowImage(Random())" alt="Card image">
     <div class="card-body">
-        <h4 class="card-title text-center">Hamster 1</h4>
+        <h4 class="card-title text-center">Hamster winner</h4>
     <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            Wins:           <span class="badge bg-success rounded-pill">3</span>
+            Wins           <span class="badge bg-success rounded-pill">3</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            Draws:          <span class="badge bg-warning rounded-pill">2</span>
+            Draws          <span class="badge bg-warning rounded-pill">2</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            Losses:         <span class="badge bg-danger rounded-pill">1</span>
+            Losses         <span class="badge bg-danger rounded-pill">1</span>
         </li>
     </ul>
     </div>
-        </div>
-    </div>
 
-    <div class="col-md-3" >
-        <a href="" target="_blank">
-            <img class="card-img-top" src="images/vs.png" alt="vs" onclick="">
-        </a>
     </div>
-
-    <div class="col-md-4">
-        <div class="card bg-light" style="width:auto">
-            <a href="" target="_blank">
-                <img class="card-img-top" src="images/hamster/hamster-2.jpg" alt="Card image" onclick="">
-            </a>
-    <div class="card-body">
-        <h4 class="card-title text-center">Hamster 2</h4>
-    <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Wins:           <span class="badge bg-success rounded-pill">3</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Draws:          <span class="badge bg-warning rounded-pill">2</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Losses:         <span class="badge bg-danger rounded-pill">1</span>
-        </li>
-    </ul>
-    </div>
-        </div>
+        
+    <br />
+    
+    <div class="col text-center">
+        <button type="button" class="btn btn-primary btn-sm" @onclick="@Toggle">
+            <span class="blinking-white">Continue?</span>
+        </button>
     </div>
 
 </div>
 
 </div>
+
+</div>
+
+</p>
+
 
 @code {
 
+    private bool HideLabel  { get; set; } = false;
 
-    //static int MyMethod()
-
-    //{
-    //    int random = RandomNumberGenerator.GetInt32(1, 40);
-
-    //    return random;
-    //}
+    private void Toggle()
+    {
+        HideLabel = !HideLabel;
+    } 
 
 
-    
-    //private string? imageSource;
+    static int Random()
 
-    //private string ShowImage(int id)
-    //{
-    //    imageSource = $"images/hamster/hamster-{id}.jpg";
+    {
+        int random = RandomNumberGenerator.GetInt32(1, 40);
 
-    //    return imageSource;
-    //}
+        return random;
+    }
+
+
+    private string? imageSource;
+
+    private string ShowImage(int id)
+    {
+        imageSource = $"images/hamster/hamster-{id}.jpg";
+
+        return imageSource;
+    }
 }
